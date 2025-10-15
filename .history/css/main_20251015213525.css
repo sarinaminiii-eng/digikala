@@ -1,0 +1,1407 @@
+
+/* --- Reset & base --- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: #f6f7f9;
+  color: #23254e;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+
+/* --- Design tokens --- */
+:root {
+  --brand: #ef394e;
+  --ink: #23254e;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --surface: #ffffff;
+  --bg: #f6f7f9;
+  --radius: 12px;
+  --container: 1200px;
+}
+
+/* --- Utility / container --- */
+.container { max-width: var(--container); padding: 0 16px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 12px; border: 1px solid var(--line); background: #fff; padding: 10px 14px; cursor: pointer; transition: .15s ease-in-out; }
+.btn:hover { background: #f3f4f6; }
+.btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+  /* Topbar & Header
+   ========================= */
+/* ===== Header / Topbar (fixed & flush layout) ===== */
+
+/* Topbar */
+/* حذف فاصله پیش‌فرض صفحه */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* بنر بالای صفحه */
+.top-banner {
+  width: 100%;
+  background-size: cover;
+  margin-bottom: 10px;
+}
+
+
+/* Site header base: full-bleed header but content constrained by .header-inner */
+.site-header {
+  width: 100%;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 2200;
+  box-shadow: 0 6px 18px rgba(35,37,78,0.03);
+  padding: 0; /* remove extra outer padding so header can be flush */
+}
+
+/* header inner layout: constrained width, but small lateral padding to appear near edges */
+.header-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2px 2px;    /* very small side gutters */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between; /* logo at right, actions at left (RTL) */
+  box-sizing: border-box;
+}
+
+/* Make sure children don't add unwanted margins */
+.header-inner > * { margin: 0; }
+
+/* Logo */
+.logo { display:block; }
+.logo img { display:block; max-height:46px; }
+
+/* Search area */
+.search-area { flex: 1; display:flex; justify-content:center; position:relative; }
+.search-form { width:100%; max-width:640px; position:relative; display:flex; align-items:center; }
+.search-form input[type="search"]{
+  width:100%;
+  height:44px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  padding:0 44px 0 14px; /* search icon on left (RTL) */
+  background:#fafafa;
+  direction: rtl;
+  font-size:14px;
+  outline:none;
+  transition: border-color .18s ease, background .18s ease;
+}
+.search-form input[type="search"]:focus{
+  border-color:var(--brand);
+  background:#fff;
+}
+.search-form button{
+  position:absolute;
+  left:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  font-size:18px;
+  cursor:pointer;
+  color:#666;
+}
+
+/* Search hints: position relative to the search form and avoid global centering */
+.search-hints{
+  position:absolute;
+  top: calc(100% + 8px);
+  right: 0;                  /* align under the right edge of the search box (RTL) */
+  left: auto;                /* disable centering transform which caused conflicts */
+  width: calc(100% - 4px);
+  max-width:640px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  display:none;
+  z-index:2400;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.search-hints.show { display:block; }
+
+/* Header actions (login, orders, cart) — will sit at left due to space-between */
+.header-actions { display:flex; align-items:center; gap:8px; }
+
+/* action button base */
+.action-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:14px;
+  color:#333;
+  background:#fff;
+  border:1px solid var(--line);
+  font-weight:600;
+  gap:8px;
+  cursor:pointer;
+  transition: all .18s ease;
+  
+}
+.action-btn:hover{
+  border-color: var(--brand);
+  color: var(--brand);
+  background: #fff5f6;
+}
+
+/* Cart button + badge */
+.cart-btn { position: relative; font-size: 16px; }
+.cart-count {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+/* City selector wrapper and small yellow dot indicator */
+.city-selector {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* small yellow dot before the element (separate from layout) */
+.city-selector::before {
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  background: #ffcc00;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  border: 2px solid #fff; /* neat separation */
+  transform: translateY(-1px);
+}
+
+/* dropdown positioned relative to the selector box (not centered page) */
+.city-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;                 /* RTL: align to right edge of the selector */
+  top: calc(100% + 8px);
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(35,37,78,0.08);
+  z-index: 2500;
+  transform: none !important; /* avoid inherited transforms */
+}
+
+/* show dropdown on hover or focus-within (no JS needed) */
+.city-selector:hover .city-dropdown,
+.city-selector:focus-within .city-dropdown {
+  display: block;
+}
+
+/* dropdown items */
+.city-dropdown a {
+  display:block;
+  padding:8px 10px;
+  color:#333;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+}
+.city-dropdown a:hover { background:#faf5e6; color:#222; }
+
+/* ensure dropdowns not clipped by ancestor overflow */
+.header-inner, .nav-wrap, .container { overflow: visible; }
+
+
+
+
+/* small responsive reductions so header remains flush on small screens */
+@media (max-width: 980px) {
+  .header-inner { padding-left: 6px; padding-right: 6px; gap:10px; }
+  .search-area { display:none; } /* keep header compact on small devices */
+  .city-dropdown { min-width: 140px; right: 0; }
+}
+
+/* Clean up duplicates and prevent conflicts */
+.cart-count, .city-dropdown, .search-hints { box-sizing: border-box; }
+
+
+/* Nav container */
+.nav {
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 1100;
+}
+.nav-wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Nav list */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.nav-item { position: relative; }
+.nav-link {
+  display: inline-block;
+  padding: 10px 12px;
+  color: #444;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.nav-link:hover, .nav-item.active > .nav-link {
+  color: var(--brand);
+  background: rgba(239,57,78,0.04);
+}
+
+/* -------------------------
+   Mega Menu (desktop)
+   ------------------------- */
+/* =========================
+   REPLACE ENTIRE MEGA-MENU CSS WITH THIS BLOCK
+   (Polished, wider, aligned under trigger, RTL)
+   ========================= */
+
+/* ensure nav-wrap is a positioning context */
+.nav-wrap { position: relative; }
+
+/* make the trigger li shrink-to-fit so right:0 refers to trigger's right edge */
+.nav-list { display:flex; align-items:center; gap:12px; }
+.nav-list .has-mega {
+  position: relative !important;
+  display: inline-flex !important;
+  width: auto !important;
+  vertical-align: middle;
+}
+
+/* ---------- dropdown container (positioned relative to the li) ---------- */
+.nav-list .has-mega > .mega-menu {
+  display: none !important;                /* hidden until hover/focus */
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: calc((100vw - var(--container)) / 2) !important; /* align inner with container's right edge */
+  left: auto !important;
+  width: 1180px !important;                /* wider like Digikala */
+  max-width: calc(var(--container) - 0px) !important;
+  box-sizing: border-box !important;
+  padding: 10px 0 22px !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+/* fallback: if you prefer a simpler alignment to trigger's right edge, use this instead:
+   right: 0 !important;
+   and remove the right: calc(...) line above. */
+
+/* ---------- inner card that visually contains the menu ---------- */
+.nav-list .has-mega > .mega-menu .mega-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 20px !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 28px 60px rgba(18,23,36,0.12) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  transform-origin: top right !important;
+  opacity: 0;
+  transform: translateY(-8px) scale(.995);
+  transition: transform 240ms cubic-bezier(.22,.9,.32,1), opacity 220ms ease;
+  max-height: 560px !important;
+  overflow: auto !important;
+}
+
+/* ---------- big panel layout: narrow sidebar (right) + wide content (left) ---------- */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-panel {
+  display: grid !important;
+  grid-template-columns: 260px 1fr !important; /* sidebar 260px, content flexible */
+  gap: 26px !important;
+  align-items: start;
+  direction: rtl !important;
+}
+
+/* ---------- SIDEBAR (right) styling ---------- */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar {
+  border-left: 1px solid rgba(0,0,0,0.04);
+  padding-left: 12px;
+  padding-right: 6px;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar .ms-title {
+  font-weight: 800;
+  color: #222;
+  padding: 8px 6px;
+  margin-top: 6px;
+  font-size: 14.5px;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar li a {
+  display:block;
+  padding: 10px 8px;
+  font-size: 15px;
+  color:#333;
+  text-decoration:none;
+  border-radius:6px;
+  transition: background .12s ease, color .12s ease, padding-right .12s ease;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar li a:hover,
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar li a:focus {
+  background: rgba(239,57,78,0.05);
+  color: var(--brand);
+  outline: none;
+}
+
+/* ---------- CONTENT (left) with 4 wider columns ---------- */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-content { padding-right: 6px; padding-left: 12px; }
+.nav-list .has-mega > .mega-menu .mega-inner .mega-content .mega-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(240px, 1fr)) !important; /* wider columns */
+  gap: 14px 28px !important;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column {
+  padding: 6px 6px;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column h4 {
+  margin: 0 0 10px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--brand);
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column a {
+  display:block;
+  padding:7px 6px;
+  color:#333;
+  font-size: 14px;
+  text-decoration:none;
+  border-radius:6px;
+  text-align:right;
+  transition: color .12s ease, background .12s ease, padding-right .12s ease;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column a:hover,
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column a:focus {
+  color: var(--brand);
+  background: rgba(239,57,78,0.04);
+  padding-right: 12px;
+  outline: none;
+}
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column:hover h4,
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column:focus-within h4 {
+  color: var(--brand);
+}
+
+/* ---------- show / animate ---------- */
+.nav-list .has-mega:hover > .mega-menu,
+.nav-list .has-mega:focus-within > .mega-menu {
+  display: block !important;
+}
+.nav-list .has-mega:hover > .mega-menu .mega-inner,
+.nav-list .has-mega:focus-within > .mega-menu .mega-inner {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---------- scrollbars ---------- */
+.nav-list .has-mega > .mega-menu .mega-inner::-webkit-scrollbar { width: 10px; }
+.nav-list .has-mega > .mega-menu .mega-inner::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.08);
+  border-radius: 999px;
+  border: 2px solid #fff;
+}
+
+/* ---------- accessibility focus ring ---------- */
+.nav-list .nav-item > .nav-link:focus {
+  outline: 3px solid rgba(239,57,78,0.12);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* ---------- responsive fallbacks ---------- */
+@media (max-width: 1400px) {
+  .nav-list .has-mega > .mega-menu { width: calc(100vw - 48px) !important; right: 24px !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-panel { grid-template-columns: 220px 1fr !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-row { grid-template-columns: repeat(3, minmax(180px,1fr)) !important; }
+}
+@media (max-width: 1180px) {
+  .nav-list .has-mega > .mega-menu { width: calc(100vw - 36px) !important; right: 18px !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner { max-height: 600px !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-row { grid-template-columns: repeat(2, minmax(160px,1fr)) !important; }
+}
+@media (max-width: 980px) {
+  .nav-list .has-mega > .mega-menu { display:none !important; } /* mobile: hide desktop mega */
+}
+
+/* ---------- safety: ensure ancestor containers don't clip the dropdowns ---------- */
+.header-inner, .nav-wrap, .container { overflow: visible; pointer-events: auto; }
+
+
+
+/*SLIDER*/
+:root {
+  --slider-height-desktop: 400px;
+  --slider-height-mobile: 250px;
+  --dot-size: 8px;
+  --dot-gap: 6px;
+}
+
+.slider {
+  width: 100%;
+  height: var(--slider-height-desktop);
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.slider input[type="radio"] {
+  display: none;
+}
+
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#slide1:checked ~ .slides .s1,
+#slide2:checked ~ .slides .s2,
+#slide3:checked ~ .slides .s3,
+#slide4:checked ~ .slides .s4 {
+  opacity: 1;
+  z-index: 1;
+}
+
+.navigation-manual {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  gap: var(--dot-gap);
+  z-index: 10;
+}
+
+.navigation-manual label {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.manual-btn {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.manual-btn:hover {
+  background-color: rgba(255,255,255,0.9);
+  transform: scale(1.15);
+}
+
+#slide1:checked ~ .navigation-manual label[for="slide1"] .manual-btn,
+#slide2:checked ~ .navigation-manual label[for="slide2"] .manual-btn,
+#slide3:checked ~ .navigation-manual label[for="slide3"] .manual-btn,
+#slide4:checked ~ .navigation-manual label[for="slide4"] .manual-btn {
+  background-color: #fff;
+  transform: scale(1.25);
+}
+
+@media (max-width: 768px) {
+  :root { --dot-size: 7px; }
+  .slider { height: var(--slider-height-mobile); }
+  .navigation-manual { bottom: 8px; }
+}
+
+
+/* =========================
+   Featured Categories Section
+   ========================= */
+.categories {
+  max-width: 1350px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.categories h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: right;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  position: relative;
+  color: #333;
+}
+.categories h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  width: 60px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+.category-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px 15px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.category-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+}
+.category-card span { display:block; font-size:0.95rem; font-weight:500; color:#444; transition: color .18s; }
+.category-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color: var(--brand); }
+.category-card:hover span { color: var(--brand); }
+.category-card:hover img { transform: scale(1.08); }
+@media (max-width: 768px) { .categories-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .categories-grid { grid-template-columns: 1fr; } }
+
+/* =========================
+   Products Section (polished)
+   ========================= */
+
+
+/* Container */
+.products {
+  max-width: 1350px;
+  margin: 40px auto;
+  padding: 0;               /* we will control spacing inside */
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+/* Section header (title + see all) */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: #fafafa;
+  border-radius: 6px;
+}
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  position: relative;
+}
+.section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  right: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+.section-header .see-all {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+.section-header .see-all:hover { color: #c62828; }
+
+/* Grid: fully flush / attached layout */
+.products-grid {
+  display: grid;
+  /* column sizing: adapt to viewport, keep cards wide on large screens */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0;                       /* zero gap => attached cards */
+  align-items: stretch;
+  background-clip: padding-box;
+  /* add left/right container borders so inner card borders align */
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+/* Card styling — use inner borders so cards look separated but attached */
+.product-card {
+  background: #fff;
+  /* no outer border; simulate separation with left + bottom border */
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 320px; /* equal-ish heights */
+  box-sizing: border-box;
+  transition: background .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+/* fix top edge of first row: give top border to first row items */
+.products-grid > .product-card:nth-child(-n+4) {
+  border-top: 1px solid var(--line);
+}
+
+/* Thumb image */
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #fafafa;
+  display: block;
+  margin: 0 0 10px;
+  transition: transform .18s ease;
+}
+
+/* Title and price */
+.product-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+  text-align: right; /* RTL */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card p {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--brand);
+  text-align: right; /* price aligned right like Digikala */
+  margin-top: auto; /* push price to bottom when content smaller */
+}
+
+/* Hover: subtle background + shadow (no translate to avoid layout shift) */
+.product-card:hover {
+  background: #fff7f8; /* subtle warm highlight */
+  border-left-color: rgba(239,57,78,0.08);
+  box-shadow: 0 10px 30px rgba(35,37,78,0.05);
+}
+.product-card:hover img { transform: scale(1.03); }
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .products-grid > .product-card:nth-child(-n+5) { border-top: 1px solid var(--line); } /* safe guard */
+}
+@media (max-width: 992px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .product-card { min-height: 300px; }
+  .product-card img { height: 160px; }
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-card { min-height: 260px; padding: 10px; }
+  .product-card img { height: 140px; }
+  .section-header { padding: 10px; margin-bottom: 8px; }
+}
+@media (max-width: 420px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .product-card img { height: 180px; }
+}
+
+/* small utilities */
+.text-truncate { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+
+
+/* =========================
+   Amazing Offers (پیشنهاد شگفت‌انگیز)
+   ========================= */
+/* =========================
+   پیشنهاد شگفت‌انگیز افقی (نسخه اصلاح‌شده)
+   ========================= */
+
+.amazing-horizontal {
+  max-width: 1350px; /* هر طرف حدود 24px فاصله ≈ 1.5 سانتی‌متر */
+  margin: 40px auto;
+}
+
+.amazing-inner {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  height: 280px;
+}
+
+/* --- باکس قرمز سمت راست --- */
+.amazing-sidebar {
+  background: var(--brand);
+  color: #fff;
+  width: 220px;
+  min-width: 220px;
+  padding: 24px 28px 24px 20px; /* ← کمی چپ‌تر */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  text-align: right;
+}
+
+.amazing-sidebar h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.amazing-sidebar .timer {
+  background: #fff;
+  color: #111;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  min-width: 90px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-right: 10px; /* کمی چپ‌تر بیاد */
+}
+
+.amazing-sidebar .see-all {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  margin-right: 5px; /* چپ‌تر بیاد تا تراز با تایمر بشه */
+}
+
+.amazing-sidebar .see-all:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* --- محصولات سمت چپ --- */
+.amazing-products {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+}
+
+.amazing-card {
+  border-left: 1px solid #eee;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.amazing-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.amazing-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin: 6px 0;
+}
+
+.amazing-card .price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.amazing-card .old {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 0.8rem;
+}
+
+.amazing-card .new {
+  color: #ef394e;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.amazing-card .off {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ffdc00;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.amazing-card:hover {
+  background: #fff5f6;
+  transform: translateY(-4px);
+}
+
+/* --- ریسپانسیو --- */
+@media (max-width: 1100px) {
+  .amazing-products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .amazing-inner {
+    height: auto;
+    flex-direction: column;
+  }
+  .amazing-sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+  }
+}
+
+/* --- brands ---*/
+.popular-brands {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  font-family: 'Vazir', sans-serif;
+}
+
+.brands-box {
+  background-color: #fff;
+  width: 1350px; /* فاصله 30px از هر طرف */
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brands-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.brands-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0; /* فاصله با border تنظیم می‌شود */
+}
+
+.brands-wrapper a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  transition: transform 0.2s ease;
+  border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.brands-wrapper a:last-child {
+  border-right: none;
+}
+
+.brands-wrapper a:hover {
+  transform: scale(1.05);
+}
+
+.brands-wrapper img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* ریسپانسیو */
+@media (max-width: 1024px) {
+  .brands-wrapper img { height: 50px; }
+}
+
+@media (max-width: 768px) {
+  .brands-wrapper img { height: 40px; }
+  .brands-title { font-size: 18px; }
+  .brands-wrapper a { padding: 0 10px; }
+}
+
+
+
+<!-- ====== CSS فوتر ====== -->
+<style>
+:root{
+  --dk-red: #e60012;
+  --muted:#707070;
+  --bg:#f7f7f9;
+  --container-width:1200px;
+}
+
+body { font-family: 'Vazir', sans-serif; }
+
+/* ظرف کلی */
+.dk-footer {
+  background: var(--bg);
+  color: #222;
+  direction: rtl;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* بخش بالایی */
+.dk-footer-top { padding: 40px 12px; border-bottom: 1px solid #e8e8ea; }
+.container { max-width: var(--container-width); margin: 0 auto; display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; padding: 0 12px; }
+
+/* ستون‌ها */
+.col { flex: 1 1 200px; min-width: 180px; }
+.col-about { flex: 1.8 1 320px; }
+.col h4 { color: var(--dk-red); margin: 0 0 12px 0; font-size: 16px; font-weight: 700; }
+
+/* لوگو و متن درباره */
+.logo img{ height:36px; display:block; margin-bottom:12px; }
+.about-text { color: var(--muted); margin-bottom: 12px; max-width:360px; }
+
+/* شبکه‌های اجتماعی (آیکون کوچک) */
+.social-inline { display:flex; gap:8px; margin-top:6px; }
+.social-inline a img{ width:28px; height:28px; display:block; transition: transform .18s ease; opacity:.95; }
+.social-inline a:hover img{ transform:scale(1.12); opacity:1; }
+
+/* لیست لینک‌ها */
+.col ul { list-style:none; padding:0; margin:0; }
+.col ul li { margin:8px 0; }
+.col ul li a { color:#222; text-decoration:none; transition: color .18s ease, transform .18s ease; display:inline-block; }
+.col ul li a:hover { color:var(--dk-red); transform: translateX(4px); }
+
+/* اپلیکیشن */
+.app-badges { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; align-items:center; }
+.app-badges img{ height:44px; border-radius:6px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: transform .18s; }
+.app-badges a:hover img{ transform: translateY(-3px); }
+
+/* نمادها و پرداخت */
+.payments { display:flex; gap:10px; align-items:center; margin:10px 0 6px; flex-wrap:wrap; }
+.payments img{ height:48px; width:auto; filter:grayscale(20%); opacity:.95; transition: filter .18s, transform .18s; }
+.payments img:hover{ filter: none; transform: translateY(-3px); }
+
+/* تماس */
+.contact { color:var(--muted); margin-top:6px; }
+.contact a { color: #222; text-decoration: none; font-weight:600; }
+
+/* بخش پایینی */
+.dk-footer-bottom { padding: 18px 12px; background: transparent; }
+.bottom-inner { max-width: var(--container-width); margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:0 12px; flex-wrap:wrap; }
+.bottom-inner .left p{ color:var(--muted); margin:0; font-size:13px; }
+.bottom-inner .right nav a{ margin-left:16px; color:var(--muted); text-decoration:none; font-size:13px; transition: color .18s; }
+.bottom-inner .right nav a:hover{ color: #222; }
+
+/* دسترسی و فوکوس */
+a:focus { outline: 3px solid rgba(230,0,18,0.12); outline-offset: 3px; border-radius:4px; }
+
+/* ریسپانسیو */
+@media (max-width: 1024px){
+  .container{ gap:18px; }
+  .about-text{ max-width: 100%; }
+}
+
+@media (max-width: 780px){
+  .container{ flex-direction: column; align-items: center; text-align:center; padding-bottom:6px; }
+  .col{ min-width: auto; width: 100%; }
+  .col-about{ order: -1; }
+  .bottom-inner{ flex-direction:column; gap:8px; text-align:center; }
+  .bottom-inner .right nav a{ margin-left:8px; margin-right:8px; }
+}
+
+
+.app-banner {
+  width: calc(100% - 10px); /* فاصله نیم سانتی متر از هر طرف */
+  background-color: #213a5c; /* آبی پررنگ */
+  height: 60px; /* حدود 2 سانتی متر */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px; /* گوشه‌های کمی گرد */
+  margin: 5px; /* فاصله از هر طرف */
+  box-sizing: border-box;
+}
+
+.banner-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between; /* فاصله بین متن و آیکون‌ها */
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  flex-direction: row-reverse; /* متن سمت راست و آیکون‌ها سمت چپ */
+}
+
+.app-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.app-icons a img {
+  height: 40px; /* ارتفاع placeholder */
+  transition: transform 0.2s ease;
+}
+
+.app-icons a:hover img {
+  transform: scale(1.1);
+}
+
+.app-text {
+  color: #fff;
+  font-family: 'Vazir', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .app-icons a img {
+    height: 24px;
+  }
+  .app-text {
+    font-size: 14px;
+  }
+}
+
+
+/* ===== Force mega to open exactly under the trigger (override safety block) ===== */
+
+
+
+.nav-list .has-mega > .mega-menu {
+  /* Make the container wide but never wider than viewport minus small gutter */
+  width: min(1200px, calc(100vw - 48px)) !important;
+  right: calc((100vw - min(1200px, calc(100vw - 48px))) / 2) !important; /* center inner over container */
+  padding: 18px 20px !important;
+}
+
+/* inner visual card */
+.nav-list .has-mega > .mega-menu .mega-inner {
+  padding: 20px !important;
+  max-height: 620px !important;
+}
+
+/* panel: set sidebar narrower and content area flexible */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-panel {
+  grid-template-columns: 220px 1fr !important; /* sidebar 220px, content rest */
+  gap: 26px !important;
+}
+
+/* content row: ensure 4 columns with reasonable minimum width */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-content .mega-row {
+  grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
+  gap: 16px 28px !important;
+}
+
+/* reduce per-column padding so more content fits if needed */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-column {
+  padding: 4px 6px !important;
+}
+
+/* If you still see the 4th column drop, reduce min width slightly */
+@media (min-width: 1200px) {
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-content .mega-row {
+    grid-template-columns: repeat(4, minmax(180px, 1fr)) !important;
+  }
+}
+
+/* Responsive fallbacks: allow the menu to shrink on smaller screens */
+@media (max-width: 1180px) {
+  .nav-list .has-mega > .mega-menu { width: calc(100vw - 48px) !important; right: 24px !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-panel { grid-template-columns: 200px 1fr !important; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-row { grid-template-columns: repeat(2, minmax(160px, 1fr)) !important; }
+}
+
+/* Safety: ensure the dropdown can overflow horizontally when necessary (prevents clipping) */
+.nav-list .has-mega > .mega-menu,
+.nav-list .has-mega > .mega-menu .mega-inner { overflow: visible !important; }
+
+/* Optional: add small visual tweak to keep sidebar text compact */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-sidebar li a { padding: 8px 6px !important; font-size: 14px !important; }
+
+/* ===== Final override: force mega to open exactly under the trigger =====
+   Paste at the END of main.css (after previous mega-menu rules)
+   This will stop li from stretching and force right:0 positioning to work.
+*/
+
+/* 1) Ensure nav-list behaves as a row of non-stretching items */
+.nav-list {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  justify-content: flex-start !important; /* keep items laid out from right to left visually (RTL) */
+}
+
+/* 2) Prevent children li from stretching inside the flex container */
+.nav-list > li {
+  flex: 0 0 auto !important;   /* do not grow or shrink to fill */
+  min-width: 0 !important;
+  width: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* 3) Force the trigger to be shrink-to-fit and positioning context */
+.nav-list .has-mega {
+  position: relative !important;
+  display: inline-block !important;
+  width: auto !important;
+  vertical-align: middle !important;
+}
+
+/* 4) Ensure the dropdown is positioned relative to the li and anchored to its right edge */
+.nav-list .has-mega > .mega-menu {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;    /* CRITICAL: align to trigger's right edge */
+  left: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  width: min(1200px, calc(100vw - 48px)) !important; /* wide but limited */
+  max-width: calc(var(--container) - 0px) !important;
+  box-sizing: border-box !important;
+  z-index: 9999 !important;
+}
+
+/* 5) Inner card uses full width of dropdown */
+.nav-list .has-mega > .mega-menu .mega-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  transform-origin: top right !important;
+}
+
+/* 6) Remove legacy centering rules if present */
+.nav-list .has-mega > .mega-menu[style*="left: 50%"] { left: auto !important; }
+.nav-list .has-mega > .mega-menu[style*="transform: translateX(-50%)"] { transform: none !important; }
+
+/* 7) Small safety for headers that use space-between */
+.header-inner .nav-wrap, .nav-wrap {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 8) Responsive fallback: keep dropdown within viewport gutters */
+@media (max-width: 1180px) {
+  .nav-list .has-mega > .mega-menu { width: calc(100vw - 32px) !important; right: 16px !important; }
+}
+
+
+/* =========================
+   STORY STRIP — RTL, Vazirmatn, 2-line titles, scroll-snap
+   Centered, max-width 1350px, CSS-only buttons
+   ========================= */
+/* فونت Vazirmatn */
+body, .story-strip {
+  font-family: "Vazirmatn", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container */
+.story-strip {
+  background: transparent;
+  padding: 8px 0;
+}
+
+.story-inner.container {
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Horizontal scroll */
+.stories {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  align-items: center;
+  padding: 10px 6px;
+}
+
+/* Single story */
+.story {
+  flex: 0 0 auto;
+  width: 96px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Circular thumbnail */
+.story-thumb {
+  width: 78px;
+  height: 78px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 3px solid rgba(0,0,0,0.04);
+  box-shadow: 0 6px 18px rgba(35,37,78,0.06);
+  transition: transform .22s cubic-bezier(.22,.9,.32,1), box-shadow .18s ease, border-color .18s ease;
+}
+
+.story-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  transition: transform .28s ease;
+}
+
+.story:hover .story-thumb,
+.story:focus .story-thumb {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 40px rgba(35,37,78,0.09);
+  border-color: rgba(239,57,78,0.08);
+}
+
+/* Title */
+.story-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink, #111);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/* Buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.05);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 2;
+  transition: background .2s;
+}
+
+.scroll-btn:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+.scroll-btn.left { left: 8px; }
+.scroll-btn.right { right: 8px; }
+
+/* Responsive */
+@media (min-width: 1200px) {
+  .story { width: 110px; }
+  .story-thumb { width: 86px; height: 86px; }
+  .story-title { font-size: 14px; }
+}
+
+@media (max-width: 900px) {
+  .story { width: 96px; }
+  .story-thumb { width: 78px; height: 78px; }
+  .story-title { font-size: 13px; }
+}
+
+@media (max-width: 560px) {
+  .story-inner.container { padding: 0 12px; }
+  .stories { gap: 10px; padding: 8px 4px; }
+  .story { width: 86px; }
+  .story-thumb { width: 72px; height: 72px; }
+  .story-title { font-size: 12px; }
+}
+
+
+

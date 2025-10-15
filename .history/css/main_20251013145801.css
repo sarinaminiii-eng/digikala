@@ -1,0 +1,1258 @@
+/* =========================
+   main.css — Clean consolidated stylesheet
+   (Reset, tokens, header, nav/mega, hero, categories, products)
+   ========================= */
+
+/* --- Reset & base --- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: #f6f7f9;
+  color: #23254e;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+
+/* --- Design tokens --- */
+:root {
+  --brand: #ef394e;
+  --ink: #23254e;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --surface: #ffffff;
+  --bg: #f6f7f9;
+  --radius: 12px;
+  --container: 1200px;
+}
+
+/* --- Utility / container --- */
+.container { max-width: var(--container); padding: 0 16px; margin: 0 auto; }
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 12px; border: 1px solid var(--line); background: #fff; padding: 10px 14px; cursor: pointer; transition: .15s ease-in-out; }
+.btn:hover { background: #f3f4f6; }
+.btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+  /* Topbar & Header
+   ========================= */
+/* ===== Header / Topbar (fixed & flush layout) ===== */
+
+/* Topbar */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  color: #444;
+}
+.topbar .topbar-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 6px 8px; /* tighter gutters */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Site header base: full-bleed header but content constrained by .header-inner */
+.site-header {
+  width: 100%;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 2200;
+  box-shadow: 0 6px 18px rgba(35,37,78,0.03);
+  padding: 0; /* remove extra outer padding so header can be flush */
+}
+
+/* header inner layout: constrained width, but small lateral padding to appear near edges */
+.header-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 2px 2px;    /* very small side gutters */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between; /* logo at right, actions at left (RTL) */
+  box-sizing: border-box;
+}
+
+/* Make sure children don't add unwanted margins */
+.header-inner > * { margin: 0; }
+
+/* Logo */
+.logo { display:block; }
+.logo img { display:block; max-height:46px; }
+
+/* Search area */
+.search-area { flex: 1; display:flex; justify-content:center; position:relative; }
+.search-form { width:100%; max-width:640px; position:relative; display:flex; align-items:center; }
+.search-form input[type="search"]{
+  width:100%;
+  height:44px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  padding:0 44px 0 14px; /* search icon on left (RTL) */
+  background:#fafafa;
+  direction: rtl;
+  font-size:14px;
+  outline:none;
+  transition: border-color .18s ease, background .18s ease;
+}
+.search-form input[type="search"]:focus{
+  border-color:var(--brand);
+  background:#fff;
+}
+.search-form button{
+  position:absolute;
+  left:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  font-size:18px;
+  cursor:pointer;
+  color:#666;
+}
+
+/* Search hints: position relative to the search form and avoid global centering */
+.search-hints{
+  position:absolute;
+  top: calc(100% + 8px);
+  right: 0;                  /* align under the right edge of the search box (RTL) */
+  left: auto;                /* disable centering transform which caused conflicts */
+  width: calc(100% - 4px);
+  max-width:640px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  display:none;
+  z-index:2400;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.search-hints.show { display:block; }
+
+/* Header actions (login, orders, cart) — will sit at left due to space-between */
+.header-actions { display:flex; align-items:center; gap:8px; }
+
+/* action button base */
+.action-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 10px;
+  border-radius:10px;
+  font-size:14px;
+  color:#333;
+  background:#fff;
+  border:1px solid var(--line);
+  font-weight:600;
+  gap:8px;
+  cursor:pointer;
+  transition: all .18s ease;
+}
+.action-btn:hover{
+  border-color: var(--brand);
+  color: var(--brand);
+  background: #fff5f6;
+}
+
+/* Cart button + badge */
+.cart-btn { position: relative; font-size: 16px; }
+.cart-count {
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+/* City selector wrapper and small yellow dot indicator */
+.city-selector {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* small yellow dot before the element (separate from layout) */
+.city-selector::before {
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  background: #ffcc00;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  border: 2px solid #fff; /* neat separation */
+  transform: translateY(-1px);
+}
+
+/* dropdown positioned relative to the selector box (not centered page) */
+.city-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;                 /* RTL: align to right edge of the selector */
+  top: calc(100% + 8px);
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(35,37,78,0.08);
+  z-index: 2500;
+  transform: none !important; /* avoid inherited transforms */
+}
+
+/* show dropdown on hover or focus-within (no JS needed) */
+.city-selector:hover .city-dropdown,
+.city-selector:focus-within .city-dropdown {
+  display: block;
+}
+
+/* dropdown items */
+.city-dropdown a {
+  display:block;
+  padding:8px 10px;
+  color:#333;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+}
+.city-dropdown a:hover { background:#faf5e6; color:#222; }
+
+/* ensure dropdowns not clipped by ancestor overflow */
+.header-inner, .nav-wrap, .container { overflow: visible; }
+
+/* small responsive reductions so header remains flush on small screens */
+@media (max-width: 980px) {
+  .header-inner { padding-left: 6px; padding-right: 6px; gap:10px; }
+  .search-area { display:none; } /* keep header compact on small devices */
+  .city-dropdown { min-width: 140px; right: 0; }
+}
+
+/* Clean up duplicates and prevent conflicts */
+.cart-count, .city-dropdown, .search-hints { box-sizing: border-box; }
+
+
+/* Nav container */
+.nav {
+  background: #fff;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 1100;
+}
+.nav-wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Nav list */
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.nav-item { position: relative; }
+.nav-link {
+  display: inline-block;
+  padding: 10px 12px;
+  color: #444;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+}
+.nav-link:hover, .nav-item.active > .nav-link {
+  color: var(--brand);
+  background: rgba(239,57,78,0.04);
+}
+
+/* -------------------------
+   Mega Menu (desktop)
+   ------------------------- */
+/* === Digikala-like Mega Menu: right sidebar + wide content (RTL) === */
+
+/* parent must be relative so the absolute mega positions relative to the li */
+.nav-list .has-mega { position: relative; }
+
+/* hidden container; we align it to the right side of the parent (RTL look) */
+.nav-list .has-mega > .mega-menu {
+  display: none;                /* hidden by default */
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;                     /* align flush to the right edge of the li */
+  left: auto;
+  width: 100vw;                 /* allow full-bleed bg if needed */
+  z-index: 3500;
+  padding: 6px 0 20px;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+/* inner container which is visually the white card */
+.nav-list .has-mega > .mega-menu .mega-inner {
+  width: min(var(--container), 1180px);
+  margin: 0 auto;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 22px 48px rgba(18,23,36,0.08);
+  border: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+  transform-origin: top right;
+  opacity: 0;
+  transform: translateY(-8px) scale(.995);
+  transition: transform 220ms cubic-bezier(.22,.9,.32,1), opacity 220ms ease;
+  max-height: 520px;
+}
+
+/* the real content layout: RIGHT sidebar + LEFT content */
+.nav-list .has-mega > .mega-menu .mega-inner .mega-panel {
+  display: grid;
+  grid-template-columns: 240px 1fr; /* right narrow sidebar 240px, left flexible wide panel */
+  gap: 18px;
+  align-items: start;
+  direction: rtl; /* ensure right-align inside sidebar */
+}
+
+/* SIDEBAR (right) */
+.mega-sidebar {
+  border-left: 1px solid rgba(0,0,0,0.03);
+  padding-left: 12px;
+  padding-right: 6px;
+}
+.mega-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.mega-sidebar .ms-title {
+  font-weight: 700;
+  color: #333;
+  padding: 8px 6px;
+  margin-top: 6px;
+}
+.mega-sidebar li a {
+  display: block;
+  padding: 8px 6px;
+  color: #4a4a4a;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.mega-sidebar li a:hover,
+.mega-sidebar li a:focus {
+  color: var(--brand);
+  background: rgba(239,57,78,0.04);
+  outline: none;
+}
+
+/* CONTENT (left panel) — multiple columns inside */
+.mega-content { padding-right: 6px; padding-left: 18px; }
+.mega-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px 22px;
+}
+.mega-column h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: #222;
+  font-weight: 700;
+}
+.mega-column a {
+  display:block;
+  padding: 6px 6px;
+  color:#4a4a4a;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+  text-align:right;
+}
+.mega-column a:hover, .mega-column a:focus {
+  color: var(--brand);
+  background: rgba(239,57,78,0.03);
+  padding-right: 12px;
+  outline: none;
+}
+.mega-column:hover h4, .mega-column:focus-within h4 { color: var(--brand); }
+
+/* show on hover/focus-within (keeps accessible) */
+.nav-list .has-mega:hover > .mega-menu,
+.nav-list .has-mega:focus-within > .mega-menu {
+  display: block;
+}
+.nav-list .has-mega:hover > .mega-menu .mega-inner,
+.nav-list .has-mega:focus-within > .mega-menu .mega-inner {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* scrollbar styling for inner area when long */
+.nav-list .has-mega > .mega-menu .mega-inner { overflow: auto; }
+.nav-list .has-mega > .mega-menu .mega-inner::-webkit-scrollbar { width: 10px; height: 10px; }
+.nav-list .has-mega > .mega-menu .mega-inner::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.08);
+  border-radius: 999px;
+  border: 2px solid #fff;
+}
+
+/* responsive adjustments */
+@media (max-width: 1180px) {
+  .nav-list .has-mega > .mega-menu .mega-inner { max-height: 600px; }
+  .nav-list .has-mega > .mega-menu .mega-inner .mega-panel { grid-template-columns: 200px 1fr; }
+  .mega-sidebar { display: block; }
+  .mega-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 980px) {
+  .nav-list .has-mega > .mega-menu { display: none !important; } /* mobile: hide desktop mega */
+}
+
+
+
+/* safety: ensure ancestor containers don't clip the dropdown */
+.header-inner, .nav-wrap, .container { overflow: visible; }
+
+/* ===== Fix: align mega-menu to the RIGHT edge of the container (Digikala-style) ===== */
+/* assume --container is site width token (e.g. 1200px) */
+
+/* make sure nav-wrap spans full width and is the reference */
+.nav-wrap { position: relative; }
+
+/* shift the absolute mega-menu so its right edge matches the container's right edge */
+.nav-list .has-mega > .mega-menu {
+  /* keep it full-bleed for background, but offset from the viewport right so inner card sits over container */
+  left: auto;
+  right: calc((100vw - var(--container)) / 2); /* <-- important */
+}
+
+/* ensure inner card doesn't re-center itself */
+.nav-list .has-mega > .mega-menu .mega-inner {
+  margin-left: 0;
+  margin-right: 0;
+  width: var(--container); /* ensure inner is same width as container */
+  max-width: var(--container);
+}
+
+/*SLIDER*/
+body {
+  font-family: 'Vazir', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  max-height: 450px;
+  overflow: hidden;
+}
+
+/* مخفی کردن input radio */
+.slider input[type="radio"] {
+  display: none;
+}
+
+/* اسلایدها */
+.slides {
+  display: flex;
+  width: 200%; /* تعداد اسلاید * 100% */
+  animation: slide-animation 8s infinite steps(2);
+}
+
+.slide {
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+/* متن روی اسلاید */
+.slide-text {
+  position: absolute;
+  bottom: 40px;
+  left: 50px;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  padding: 20px 30px;
+  border-radius: 8px;
+}
+
+.slide-text h2 {
+  margin: 0 0 10px 0;
+  font-size: 28px;
+}
+
+.slide-text p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* CSS animation خودکار اسلایدها */
+@keyframes slide-animation {
+  0% { transform: translateX(0%); }
+  50% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* وقتی کاربر روی نقطه کلیک کرد، animation متوقف شود */
+#slide1:checked ~ .slides,
+#slide2:checked ~ .slides {
+  animation: none;
+}
+
+/* نقاط ناوبری کوچک */
+.navigation-manual {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 10;
+}
+
+.manual-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.manual-btn:hover,
+#slide1:checked ~ .navigation-manual label[for="slide1"],
+#slide2:checked ~ .navigation-manual label[for="slide2"] {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+/* ریسپانسیو */
+@media screen and (max-width: 1024px) {
+  .slide img { height: 350px; }
+  .slide-text h2 { font-size: 24px; }
+  .slide-text p { font-size: 14px; }
+}
+
+@media screen and (max-width: 768px) {
+  .slide img { height: 250px; }
+  .slide-text { left: 20px; bottom: 20px; padding: 15px 20px; }
+  .slide-text h2 { font-size: 20px; }
+  .slide-text p { font-size: 12px; }
+}
+
+/* =========================
+   Hero / Slider
+   ========================= */
+.hero { padding: 16px 0; }
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg,#fff,#fff);
+}
+
+/* hide radios visually but keep them accessible */
+.hero-slider input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* slides wrapper */
+.hs-slides {
+  display: flex;
+  width: 300%;
+  transition: transform 0.6s cubic-bezier(.22,.9,.32,1);
+}
+.hs-slide {
+  width: 100%;
+  flex: 0 0 100%;
+  position: relative;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 28px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.hs-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 52%;
+  object-fit: cover;
+  transform-origin: left center;
+}
+.hs-content {
+  position: relative;
+  width: 48%;
+  padding-right: 36px;
+  z-index: 2;
+  text-align: right;
+}
+.hs-content h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; }
+.hs-content p { margin: 0 0 14px; color: #555; }
+
+/* dots */
+.hs-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 30;
+}
+.hs-dots label {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.15);
+  display: inline-block;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.6);
+}
+#hs1:checked ~ .hs-slides { transform: translateX(0%); }
+#hs2:checked ~ .hs-slides { transform: translateX(-100%); }
+#hs3:checked ~ .hs-slides { transform: translateX(-200%); }
+#hs1:checked ~ .hs-dots label[for="hs1"],
+#hs2:checked ~ .hs-dots label[for="hs2"],
+#hs3:checked ~ .hs-dots label[for="hs3"] {
+  background: var(--brand);
+  box-shadow: 0 0 0 3px rgba(239,57,78,0.12);
+}
+
+/* responsive hero tweaks */
+@media (max-width: 1024px) {
+  .hs-img { width: 48%; }
+  .hs-content { width: 52%; padding-right: 20px; }
+  .hs-content h1 { font-size: 26px; }
+}
+@media (max-width: 640px) {
+  .hs-slide { padding: 16px; min-height: 180px; }
+  .hs-img { position: absolute; left: 0; top: 0; width: 100%; height: 55%; opacity: 0.95; }
+  .hs-content { width: 100%; padding-right: 0; margin-top: 58%; text-align: center; }
+  .hs-content h1 { font-size: 20px; }
+  .hs-dots { bottom: 8px; }
+}
+
+
+
+/* =========================
+   Featured Categories Section
+   ========================= */
+.categories {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.categories h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: right;
+  padding: 10px 15px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  position: relative;
+  color: #333;
+}
+.categories h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  width: 60px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+.category-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  text-align: center;
+  padding: 20px 15px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.category-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+}
+.category-card span { display:block; font-size:0.95rem; font-weight:500; color:#444; transition: color .18s; }
+.category-card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color: var(--brand); }
+.category-card:hover span { color: var(--brand); }
+.category-card:hover img { transform: scale(1.08); }
+@media (max-width: 768px) { .categories-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .categories-grid { grid-template-columns: 1fr; } }
+
+/* =========================
+   Products Section (polished)
+   ========================= */
+/* =========================
+   Products Section — flush / Digikala-like
+   Targets your existing HTML (no HTML changes required)
+   ========================= */
+
+/* Container */
+.products {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0;               /* we will control spacing inside */
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+/* Section header (title + see all) */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: #fafafa;
+  border-radius: 6px;
+}
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  position: relative;
+}
+.section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  right: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+.section-header .see-all {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+}
+.section-header .see-all:hover { color: #c62828; }
+
+/* Grid: fully flush / attached layout */
+.products-grid {
+  display: grid;
+  /* column sizing: adapt to viewport, keep cards wide on large screens */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0;                       /* zero gap => attached cards */
+  align-items: stretch;
+  background-clip: padding-box;
+  /* add left/right container borders so inner card borders align */
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+/* Card styling — use inner borders so cards look separated but attached */
+.product-card {
+  background: #fff;
+  /* no outer border; simulate separation with left + bottom border */
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 320px; /* equal-ish heights */
+  box-sizing: border-box;
+  transition: background .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+
+/* fix top edge of first row: give top border to first row items */
+.products-grid > .product-card:nth-child(-n+4) {
+  border-top: 1px solid var(--line);
+}
+
+/* Thumb image */
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  background: #fafafa;
+  display: block;
+  margin: 0 0 10px;
+  transition: transform .18s ease;
+}
+
+/* Title and price */
+.product-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+  text-align: right; /* RTL */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-card p {
+  margin: 10px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--brand);
+  text-align: right; /* price aligned right like Digikala */
+  margin-top: auto; /* push price to bottom when content smaller */
+}
+
+/* Hover: subtle background + shadow (no translate to avoid layout shift) */
+.product-card:hover {
+  background: #fff7f8; /* subtle warm highlight */
+  border-left-color: rgba(239,57,78,0.08);
+  box-shadow: 0 10px 30px rgba(35,37,78,0.05);
+}
+.product-card:hover img { transform: scale(1.03); }
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .products-grid > .product-card:nth-child(-n+5) { border-top: 1px solid var(--line); } /* safe guard */
+}
+@media (max-width: 992px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .product-card { min-height: 300px; }
+  .product-card img { height: 160px; }
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .product-card { min-height: 260px; padding: 10px; }
+  .product-card img { height: 140px; }
+  .section-header { padding: 10px; margin-bottom: 8px; }
+}
+@media (max-width: 420px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .product-card img { height: 180px; }
+}
+
+/* small utilities */
+.text-truncate { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+
+
+/* =========================
+   Amazing Offers (پیشنهاد شگفت‌انگیز)
+   ========================= */
+/* =========================
+   پیشنهاد شگفت‌انگیز افقی (نسخه اصلاح‌شده)
+   ========================= */
+
+.amazing-horizontal {
+  max-width: 1400px; /* هر طرف حدود 24px فاصله ≈ 1.5 سانتی‌متر */
+  margin: 40px auto;
+}
+
+.amazing-inner {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  height: 280px;
+}
+
+/* --- باکس قرمز سمت راست --- */
+.amazing-sidebar {
+  background: var(--brand);
+  color: #fff;
+  width: 220px;
+  min-width: 220px;
+  padding: 24px 28px 24px 20px; /* ← کمی چپ‌تر */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  text-align: right;
+}
+
+.amazing-sidebar h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.amazing-sidebar .timer {
+  background: #fff;
+  color: #111;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  min-width: 90px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-right: 10px; /* کمی چپ‌تر بیاد */
+}
+
+.amazing-sidebar .see-all {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  margin-right: 5px; /* چپ‌تر بیاد تا تراز با تایمر بشه */
+}
+
+.amazing-sidebar .see-all:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* --- محصولات سمت چپ --- */
+.amazing-products {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+}
+
+.amazing-card {
+  border-left: 1px solid #eee;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.amazing-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.amazing-card h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin: 6px 0;
+}
+
+.amazing-card .price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.amazing-card .old {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 0.8rem;
+}
+
+.amazing-card .new {
+  color: #ef394e;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.amazing-card .off {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ffdc00;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.amazing-card:hover {
+  background: #fff5f6;
+  transform: translateY(-4px);
+}
+
+/* --- ریسپانسیو --- */
+@media (max-width: 1100px) {
+  .amazing-products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .amazing-inner {
+    height: auto;
+    flex-direction: column;
+  }
+  .amazing-sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+  }
+}
+
+/*brands
+
+.popular-brands {
+  padding: 40px 12px;
+  background-color: #fff;
+  font-family: 'Vazir', sans-serif;
+}
+
+.popular-brands h2 {
+  font-size: 20px;
+  color: #222;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.brands-slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.brands-wrapper {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.brands-wrapper a {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.brands-wrapper a:hover {
+  transform: scale(1.05);
+}
+
+.brands-wrapper img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* دکمه‌های اسلایدر */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.scroll-btn:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.scroll-btn.prev { left: 0; }
+.scroll-btn.next { right: 0; }
+
+/* مخفی کردن scrollbar */
+.brands-wrapper::-webkit-scrollbar { display: none; }
+.brands-wrapper { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ریسپانسیو */
+@media (max-width: 1024px) {
+  .brands-wrapper img { height: 50px; }
+}
+
+@media (max-width: 768px) {
+  .brands-wrapper img { height: 40px; }
+  .scroll-btn { font-size: 20px; padding: 3px 8px; }
+}
+
+
+
+<!-- ====== CSS فوتر ====== -->
+<style>
+:root{
+  --dk-red: #e60012;
+  --muted:#707070;
+  --bg:#f7f7f9;
+  --container-width:1200px;
+}
+
+body { font-family: 'Vazir', sans-serif; }
+
+/* ظرف کلی */
+.dk-footer {
+  background: var(--bg);
+  color: #222;
+  direction: rtl;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* بخش بالایی */
+.dk-footer-top { padding: 40px 12px; border-bottom: 1px solid #e8e8ea; }
+.container { max-width: var(--container-width); margin: 0 auto; display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; padding: 0 12px; }
+
+/* ستون‌ها */
+.col { flex: 1 1 200px; min-width: 180px; }
+.col-about { flex: 1.8 1 320px; }
+.col h4 { color: var(--dk-red); margin: 0 0 12px 0; font-size: 16px; font-weight: 700; }
+
+/* لوگو و متن درباره */
+.logo img{ height:36px; display:block; margin-bottom:12px; }
+.about-text { color: var(--muted); margin-bottom: 12px; max-width:360px; }
+
+/* شبکه‌های اجتماعی (آیکون کوچک) */
+.social-inline { display:flex; gap:8px; margin-top:6px; }
+.social-inline a img{ width:28px; height:28px; display:block; transition: transform .18s ease; opacity:.95; }
+.social-inline a:hover img{ transform:scale(1.12); opacity:1; }
+
+/* لیست لینک‌ها */
+.col ul { list-style:none; padding:0; margin:0; }
+.col ul li { margin:8px 0; }
+.col ul li a { color:#222; text-decoration:none; transition: color .18s ease, transform .18s ease; display:inline-block; }
+.col ul li a:hover { color:var(--dk-red); transform: translateX(4px); }
+
+/* اپلیکیشن */
+.app-badges { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; align-items:center; }
+.app-badges img{ height:44px; border-radius:6px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: transform .18s; }
+.app-badges a:hover img{ transform: translateY(-3px); }
+
+/* نمادها و پرداخت */
+.payments { display:flex; gap:10px; align-items:center; margin:10px 0 6px; flex-wrap:wrap; }
+.payments img{ height:48px; width:auto; filter:grayscale(20%); opacity:.95; transition: filter .18s, transform .18s; }
+.payments img:hover{ filter: none; transform: translateY(-3px); }
+
+/* تماس */
+.contact { color:var(--muted); margin-top:6px; }
+.contact a { color: #222; text-decoration: none; font-weight:600; }
+
+/* بخش پایینی */
+.dk-footer-bottom { padding: 18px 12px; background: transparent; }
+.bottom-inner { max-width: var(--container-width); margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:0 12px; flex-wrap:wrap; }
+.bottom-inner .left p{ color:var(--muted); margin:0; font-size:13px; }
+.bottom-inner .right nav a{ margin-left:16px; color:var(--muted); text-decoration:none; font-size:13px; transition: color .18s; }
+.bottom-inner .right nav a:hover{ color: #222; }
+
+/* دسترسی و فوکوس */
+a:focus { outline: 3px solid rgba(230,0,18,0.12); outline-offset: 3px; border-radius:4px; }
+
+/* ریسپانسیو */
+@media (max-width: 1024px){
+  .container{ gap:18px; }
+  .about-text{ max-width: 100%; }
+}
+
+@media (max-width: 780px){
+  .container{ flex-direction: column; align-items: center; text-align:center; padding-bottom:6px; }
+  .col{ min-width: auto; width: 100%; }
+  .col-about{ order: -1; }
+  .bottom-inner{ flex-direction:column; gap:8px; text-align:center; }
+  .bottom-inner .right nav a{ margin-left:8px; margin-right:8px; }
+}
+
+
+.app-banner {
+  width: calc(100% - 10px); /* فاصله نیم سانتی متر از هر طرف */
+  background-color: #213a5c; /* آبی پررنگ */
+  height: 60px; /* حدود 2 سانتی متر */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px; /* گوشه‌های کمی گرد */
+  margin: 5px; /* فاصله از هر طرف */
+  box-sizing: border-box;
+}
+
+.banner-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between; /* فاصله بین متن و آیکون‌ها */
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  flex-direction: row-reverse; /* متن سمت راست و آیکون‌ها سمت چپ */
+}
+
+.app-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.app-icons a img {
+  height: 40px; /* ارتفاع placeholder */
+  transition: transform 0.2s ease;
+}
+
+.app-icons a:hover img {
+  transform: scale(1.1);
+}
+
+.app-text {
+  color: #fff;
+  font-family: 'Vazir', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .app-icons a img {
+    height: 24px;
+  }
+  .app-text {
+    font-size: 14px;
+  }
+}
