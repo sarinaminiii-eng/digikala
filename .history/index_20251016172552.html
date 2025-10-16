@@ -612,36 +612,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
-<!-- ===== Support Section ===== -->
-<div class="support-container">
-  <div class="support-btn" id="supportBtn">💬</div>
-
-  <div class="support-box" id="supportBox">
-    <div class="support-header">
-      پشتیبانی آنلاین
-      <span class="support-close" id="supportClose">×</span>
-    </div>
-    <div class="support-body">
-      <p>سلام! برای پشتیبانی می‌تونی پیام بدی:</p>
-      <a href="https://t.me/your_support" target="_blank" class="support-link">ارسال پیام در تلگرام</a>
-    </div>
-  </div>
-</div>
-
-<!-- JavaScript -->
-<script>
-const supportBtn = document.getElementById('supportBtn');
-const supportBox = document.getElementById('supportBox');
-const supportClose = document.getElementById('supportClose');
-
-supportBtn.addEventListener('click', () => {
-  supportBox.style.display = supportBox.style.display === 'block' ? 'none' : 'block';
-});
-
-supportClose.addEventListener('click', () => {
-  supportBox.style.display = 'none';
-});
-</script>
 
 
 
