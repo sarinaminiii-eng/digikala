@@ -1,599 +1,0 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>دیجی‌کالا — نمونه صفحه خانگی</title>
-
-
-    <!-- Persian font (needs internet). You can swap or remove if offline -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Link to external CSS -->
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
-
-  <body>
-    
-    <!-- ===== Topbar ===== -->/
-   
- 
-<div class="topbar">
-    <div class="top-left"><img src="image/863dbf4e7a39cdeeab352fc9346f81ecf23beecc_1760192069.webp" alt=""></div>۷</div>
-  </div>
-</div>
-
-<!-- ===== Site Header ===== -->
-<header class="site-header" role="banner">
-  <div class="container header-inner">
-    <!-- Logo -->
-    <a class="logo" href="/" aria-label="خانه">
-      <img src="image/digikala logo-e-h.png" alt="لوگو" />
-    </a>
-
-    <!-- Search -->
-    <div class="search-area" role="search">
-      <form class="search-form" action="#" method="get" aria-label="جستجو">
-        <input id="siteSearch" name="q" type="search" placeholder="جست‌وجوی محصول، برند و دسته..." autocomplete="off" />
-        <button type="submit" aria-label="جستجو">🔎</button>
-      </form>
-      <div id="searchHints" class="search-hints" aria-hidden="true"></div>
-    </div>
-
-    <!-- Header actions -->
-    <div class="header-actions">
-      <!-- city selector wrapped around login so both icon + login available -->
-<div class="city-selector">
-  <a href="#" class="action-btn">وارد شوید</a>
-  <!-- optional small label (you can remove .city-label if you don't want text) -->
-  <span class="city-label">شهر خود را انتخاب کنید</span>
-
-  <!-- dropdown shown on hover -->
-  <div class="city-dropdown" aria-hidden="true">
-    <a href="#">تهران</a>
-    <a href="#">مشهد</a>
-    <a href="#">اصفهان</a>
-    <a href="#">مشاهده همه شهرها</a>
-  </div>
-</div>
-      <a href="#" class="action-btn">سفارش‌ها</a>
-      <button class="action-btn cart-btn" aria-label="سبد خرید">
-        🛒 <span class="cart-count">۰</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ===== Navigation (desktop) ===== -->
-  <nav class="nav" role="navigation" aria-label="منوی اصلی">
-    <div class="container nav-wrap">
-      <ul class="nav-list">
-        <li class="nav-item has-mega">
-          <a class="nav-link" href="#">دسته‌بندی کالاها</a>
-
-          <!-- MEGA MENU (must be inside the .has-mega li) -->
-         <!-- MEGA MENU (inside li.has-mega) -->
-
-<!-- REPLACE inside your li.has-mega -->
-<div class="mega-menu" role="menu" aria-hidden="true">
-  <div class="mega-inner">
-    <div class="mega-panel">
-      <!-- RIGHT SIDEBAR: category list (narrow, vertical) -->
-      <nav class="mega-sidebar" aria-label="دسته‌های اصلی">
-        <ul>
-          <li class="ms-title">موبایل و تلویزیون</li>
-          <li><a href="#">موبایل</a></li>
-          <li><a href="#">لوازم جانبی موبایل</a></li>
-          <li><a href="#">گوشی‌های اقتصادی</a></li>
-          <li class="ms-title">کالای دیجیتال</li>
-          <li><a href="#">لپ‌تاپ</a></li>
-          <li><a href="#">دوربین</a></li>
-          <li><a href="#">هدفون</a></li>
-          <li class="ms-title">خانه و آشپزخانه</li>
-          <li><a href="#">لوازم برقی</a></li>
-          <li><a href="#">آشپزخانه</a></li>
-          <li><a href="#">دکوراسیون</a></li>
-          <!-- ... ادامه دسته‌ها مطابق نیازت ... -->
-        </ul>
-      </nav>
-
-      <!-- LEFT CONTENT: wide area with multiple columns / groups -->
-      <div class="mega-content" role="region" aria-label="زیردسته‌ها">
-        <div class="mega-row">
-          <div class="mega-column">
-            <h4>گوشی بر اساس قیمت</h4>
-            <a href="#">گوشی تا ۳ میلیون</a>
-            <a href="#">۳ تا ۷ میلیون</a>
-            <a href="#">۷ تا ۱۵ میلیون</a>
-            <a href="#">۱۵ تا 30 میلیون</a>
-            <a href="#">30 تا 40 میلیون</a>
-            <a href="#">40 تا 50 میلیون</a>
-            <a href="#">پرفروش‌ترین</a>
-          </div>
-
-          <div class="mega-column">
-            <h4>لوازم جانبی</h4>
-            <a href="#">شارژر و کابل</a>
-            <a href="#">کیف و کاور</a>
-            <a href="#">پاوربانک</a>
-            <a href="#">گلس و محافظ</a>
-            <a href="#">هدفون و هدست</a>
-          </div>
-
-          <div class="mega-column">
-            <h4>برندها</h4>
-            <a href="#">سامسونگ</a>
-            <a href="#">اپل</a>
-            <a href="#">شیائومی</a>
-            <a href="#">هوآوی</a>
-            <a href="#">نوکیا</a>
-          </div>
-
-          <div class="mega-column">
-            <h4>خدمات و پیشنهادها</h4>
-            <a href="#">پیشنهاد شگفت‌انگیز</a>
-            <a href="#">ارسال فوری</a>
-            <a href="#">گارانتی و خدمات</a>
-            <a href="#">فروش ویژه</a>
-            <a href="#">محصولات نو</a>
-          </div>
-        </div>
-      </div>
-    </div> <!-- /.mega-panel -->
-  </div> <!-- /.mega-inner -->
-</div>
-<!-- /REPLACE -->
-
-        </li>
-
-        <li class="nav-item"><a class="nav-link" href="#">شگفت انگیزها</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">سوپرمارکت</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">طلای دیجیتال</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"> پرفروش ترین ها</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">سوالی دارید؟ </a></li>
-        <li class="nav-item"><a class="nav-link" href="#">در دیجی کالا بفروشید</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-<!--SLIDER-->
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-
-<div class="slider">
-  <!-- کنترل اسلایدها (کاملاً hidden) -->
-  <input type="radio" name="slider-control" id="slide1" checked hidden>
-  <input type="radio" name="slider-control" id="slide2" hidden>
-
-  <!-- اسلایدها -->
-  <div class="slides">
-    <div class="slide slide1">
-      <img src="image/eae6148a14ebdb4d0227f9906c1500ec34b0b5f3_1759739351.webp" alt="Slide 1">
-      <div class="slide-text">
-        <h2>پیشنهاد ویژه امروز</h2>
-        <p>تخفیف 50٪ روی محصولات منتخب!</p>
-      </div>
-    </div>
-    <div class="slide slide2">
-      <img src="image/99e11cf0ee340ea1df5efb0364915317759b5a74_1754149753.gif" alt="Slide 2">
-      <div class="slide-text">
-        <h2>جدیدترین محصولات</h2>
-        <p>تازه‌ترین کالاها با بهترین قیمت‌ها</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- نقاط ناوبری کوچک -->
-  <div class="navigation-manual">
-    <label for="slide1" class="manual-btn"></label>
-    <label for="slide2" class="manual-btn"></label>
-  </div>
-</div>
-
-<!--AMAZING OFFERS-->
-<!-- پیشنهاد شگفت‌انگیز افقی -->
-<section class="amazing-horizontal">
-  <div class="amazing-inner">
-
-    <!-- باکس قرمز سمت راست -->
-    <div class="amazing-sidebar">
-      <h2>پیشنهاد<br>شگفت‌انگیز</h2>
-      <div class="timer">۰۲:۱۳:۲۵</div>
-      <a href="#" class="see-all">مشاهده همه →</a>
-    </div>
-
-    <!-- محصولات سمت چپ -->
-    <div class="amazing-products">
-      <div class="amazing-card">
-        <img src="image/214714a4c7baea4b502d7efd9e71d8c596fca539_1758443046.webp" alt="گوشی موبایل">
-        <h3>گوشی موبایل سامسونگ</h3>
-        <div class="price">
-          <span class="old">۱۴,۰۰۰,۰۰۰</span>
-          <span class="new">۱۱,۲۰۰,۰۰۰ تومان</span>
-          <span class="off">٪۲۰</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/aaa06a48637133fa0a3f7be576f1a77502729d6a_1754241452.webp" alt="لپ‌تاپ">
-        <h3>لپ‌تاپ ایسوس</h3>
-        <div class="price">
-          <span class="old">۳۸,۰۰۰,۰۰۰</span>
-          <span class="new">۳۲,۳۰۰,۰۰۰ تومان</span>
-          <span class="off">٪۱۵</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/234d4e363b91255ab37167e24ca6fbafa7a87a0f_1757800747.webp" alt="ساعت هوشمند">
-        <h3>ساعت هوشمند</h3>
-        <div class="price">
-          <span class="old">۴,۰۰۰,۰۰۰</span>
-          <span class="new">۳,۶۰۰,۰۰۰ تومان</span>
-          <span class="off">٪۱۰</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/b133134cfa1f1a01c046c0b1089a1a9d0d73f612_1728807674.webp" alt="هدفون">
-        <h3>هدفون بی‌سیم</h3>
-        <div class="price">
-          <span class="old">۲,۰۰۰,۰۰۰</span>
-          <span class="new">۱,۶۰۰,۰۰۰ تومان</span>
-          <span class="off">٪۲۰</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/119490018.webp" alt="کتاب">
-        <h3>کتاب آموزشی</h3>
-        <div class="price">
-          <span class="old">۳۵۰,۰۰۰</span>
-          <span class="new">۲۴۵,۰۰۰ تومان</span>
-          <span class="off">٪۳۰</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/ab342aa8b7e655c9cb84d357534d3debe09e2834_1739890118.webp" alt="کیف زنانه">
-        <h3>کیف زنانه</h3>
-        <div class="price">
-          <span class="old">۱,۱۰۰,۰۰۰</span>
-          <span class="new">۹۰۲,۰۰۰ تومان</span>
-          <span class="off">٪۱۸</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/0fe78cca5a8a215efed395318c0332c01818644e_1719853592.webp" alt="کفش">
-        <h3>کفش ورزشی</h3>
-        <div class="price">
-          <span class="old">۲,۰۰۰,۰۰۰</span>
-          <span class="new">۱,۷۶۰,۰۰۰ تومان</span>
-          <span class="off">٪۱۲</span>
-        </div>
-      </div>
-
-      <div class="amazing-card">
-        <img src="image/36ae27130a19d0c6836d284d0f92d06653758e68_1619368860.webp" alt="اسباب‌بازی">
-        <h3>اسباب‌بازی</h3>
-        <div class="price">
-          <span class="old">۴۰۰,۰۰۰</span>
-          <span class="new">۳۰۰,۰۰۰ تومان</span>
-          <span class="off">٪۲۵</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!--BRANDS-->
-<section class="popular-brands">
-  <div class="brands-box">
-    <h2 class="brands-title">محبوب‌ترین برندها</h2>
-    <div class="brands-wrapper">
-      <a href="#"><img src="image/3960.jpg" alt="برند 1"></a>
-      <a href="#"><img src="image/af664f0bcf9bc412b741c618e6e52fc2d090198f_1619269008.png" alt="برند 2"></a>
-      <a href="#"><img src="image/7d615272ba7fc5dd708195ae858e2971de86a06f_1649498033.png" alt="برند 3"></a>
-      <a href="#"><img src="image/1313.png" alt="برند 4"></a>
-      <a href="#"><img src="image/efb14accdad9be1b2176aa0317c8bbac43733831_1609325767.png" alt="برند 5"></a>
-      <a href="#"><img src="image/3972.png" alt="برند 6"></a>
-       <a href="#"><img src="image/" alt="برند 7"></a>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-  
-</section>
-
-
-    <!-- ===== Categories ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-title">
-          <h3>خرید بر اساس دسته‌بندی</h3>
-          <a href="#">نمایش همه →</a>
-        </div>
-        <div class="cat-grid">
-          <div class="cat-card"><div class="cat-icon">📱</div><div>کالای دیجیتال</div></div>
-          <div class="cat-card"><div class="cat-icon">🏠</div><div>خانه و آشپزخانه</div></div>
-          <div class="cat-card"><div class="cat-icon">👗</div><div>مد و پوشاک</div></div>
-          <div class="cat-card"><div class="cat-icon">💄</div><div>زیبایی و سلامت</div></div>
-          <div class="cat-card"><div class="cat-icon">📚</div><div>کتاب و تحریر</div></div>
-          <div class="cat-card"><div class="cat-icon">🎮</div><div>سرگرمی و بازی</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Product grid ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-title">
-          <h3>پرفروش‌های امروز</h3>
-          <a href="#">نمایش همه →</a>
-        </div>
-        <div class="grid">
-          <!-- Card 1 -->
-          <article class="card">
-            <div class="thumb">
-              <img src="https://via.placeholder.com/300x300?text=Product" alt="گوشی هوشمند" />
-            </div>
-            <div class="info">
-              <div class="title">گوشی هوشمند ۱۲۸ گیگابایت دو سیم‌کارته</div>
-              <div class="price">
-                <span class="current">۱۴,۹۹۰,۰۰۰ تومان</span>
-                <span class="off">۱۶,۹۹۰,۰۰۰</span>
-                <span class="discount">۱۲٪</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="card">
-            <div class="thumb">
-              <img src="https://via.placeholder.com/300x300?text=Product" alt="هدفون بی‌سیم" />
-            </div>
-            <div class="info">
-              <div class="title">هدفون بی‌سیم نویزکنسلینگ</div>
-              <div class="price">
-                <span class="current">۲,۳۹۰,۰۰۰ تومان</span>
-                <span class="off">۲,۸۹۰,۰۰۰</span>
-                <span class="discount">۱۸٪</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="card">
-            <div class="thumb">
-              <img src="https://via.placeholder.com/300x300?text=Product" alt="کتانی ورزشی" />
-            </div>
-            <div class="info">
-              <div class="title">کتانی ورزشی سبک و راحت</div>
-              <div class="price">
-                <span class="current">۱,۲۹۰,۰۰۰ تومان</span>
-                <span class="off">۱,۶۹۰,۰۰۰</span>
-                <span class="discount">۲۴٪</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 4 -->
-          <article class="card">
-            <div class="thumb">
-              <img src="https://via.placeholder.com/300x300?text=Product" alt="کتاب" />
-            </div>
-            <div class="info">
-              <div class="title">کتاب رمان پرفروش</div>
-              <div class="price">
-                <span class="current">۲۴۹,۰۰۰ تومان</span>
-                <span class="off">۳۲۰,۰۰۰</span>
-                <span class="discount">۲۲٪</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Card 5 -->
-          <article class="card">
-            <div class="thumb">
-              <img src="https://via.placeholder.com/300x300?text=Product" alt="مخلوط‌کن" />
-            </div>
-            <div class="info">
-              <div class="title">مخلوط‌کن حرفه‌ای ۱۰۰۰ وات</div>
-              <div class="price">
-                <span class="current">۱,۸۹۰,۰۰۰ تومان</span>
-                <span class="off">۲,۳۹۰,۰۰۰</span>
-                <span class="discount">۲۱٪</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-  <!--might delete after-->
-   <section class="categories">
-  <h2>دسته‌بندی‌های پیشنهادی</h2>
-  <div class="categories-grid">
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="کالای دیجیتال" />
-      <span>کالای دیجیتال</span>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/892/892458.png" alt="مد و پوشاک" />
-      <span>مد و پوشاک</span>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png" alt="زیبایی و سلامت" />
-      <span>زیبایی و سلامت</span>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3643/3643910.png" alt="خانه و آشپزخانه" />
-      <span>خانه و آشپزخانه</span>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3076/3076400.png" alt="ورزش و سفر" />
-      <span>ورزش و سفر</span>
-    </div>
-    <div class="category-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="کتاب و لوازم تحریر" />
-      <span>کتاب و لوازم تحریر</span>
-    </div>
-  </div>
-</section>
-
-<!--PRODUCTS-->
-
-<section class="products">
-  <div class="section-header">
-    <h2>محصولات پیشنهادی</h2>
-    <a href="#" class="see-all">مشاهده همه →</a>
-  </div>
-  <div class="products-grid">
-    <div class="product-card">
-      <img src="image/214714a4c7baea4b502d7efd9e71d8c596fca539_1758443046.webp" alt="Product 1">
-      <h3>گوشی موبایل</h3>
-      <p>قیمت: 12,000,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/aaa06a48637133fa0a3f7be576f1a77502729d6a_1754241452.webp" alt="Product 2">
-      <h3>لپ‌تاپ</h3>
-      <p>قیمت: 25,000,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/234d4e363b91255ab37167e24ca6fbafa7a87a0f_1757800747.webp" alt="Product 3">
-      <h3>ساعت هوشمند</h3>
-      <p>قیمت: 3,500,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/b133134cfa1f1a01c046c0b1089a1a9d0d73f612_1728807674.webp" alt="Product 4">
-      <h3>هدفون بلوتوث</h3>
-      <p>قیمت: 1,200,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/119490018.webp" alt="Product 5">
-      <h3>کتاب</h3>
-      <p>قیمت: 250,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/ab342aa8b7e655c9cb84d357534d3debe09e2834_1739890118.webp" alt="Product 6">
-      <h3>کیف زنانه</h3>
-      <p>قیمت: 850,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/0fe78cca5a8a215efed395318c0332c01818644e_1719853592.webp" alt="Product 7">
-      <h3>کفش ورزشی</h3>
-      <p>قیمت: 1,500,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/36ae27130a19d0c6836d284d0f92d06653758e68_1619368860.webp" alt="Product 8">
-      <h3>اسباب‌بازی</h3>
-      <p>قیمت: 300,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/a081d6d968544e9649a39cf4cb691d8baaa38d80_1754238821.webp" alt="Product 9">
-      <h3>ساعت مچی</h3>
-      <p>قیمت: 10,500,000 تومان</p>
-    </div>
-
-    <div class="product-card">
-      <img src="image/430e886e05b9479b9e6e4898d5c0c212da15f058_1741959880.webp" alt="Product 10">
-      <h3> عطر جیبی زنانه لانکوم</h3>
-      <p>قیمت: 8,500,000 تومان</p>
-    </div>
-  </div>
-</section>
-
-
-    <!-- ===== Footer ===== -->
-   <!-- ====== Footer حرفه‌ای شبیه دیجی‌کالا ====== -->
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-
-<footer class="dk-footer" role="contentinfo">
-  <div class="dk-footer-top">
-    <div class="container">
-
-      <div class="col col-about">
-        <a class="logo" href="#" aria-label="Digikala"><img src="image/digikala logo-e-h.png" alt="لوگو" /></a>
-        <p class="about-text">فروشگاهی برای خرید امن، سریع و مطمئن با بیش از هزاران کالای متنوع.</p>
-
-        <div class="social-inline" aria-hidden="false">
-          <a href="#" class="s" aria-label="Instagram"><img src="image/download.jpeg" alt="اینستاگرام" /></a>
-          <a href="#" class="s" aria-label="Telegram"><img src="image/download (1).jpeg" alt="تلگرام" /></a>
-          <a href="#" class="s" aria-label="Twitter"><img src="image/download (1).png" alt="توییتر" /></a>
-        </div>
-      </div>
-
-      <div class="col">
-        <h4>خدمات مشتریان</h4>
-        <ul>
-          <li><a href="#">پشتیبانی</a></li>
-          <li><a href="#">پیگیری سفارش</a></li>
-          <li><a href="#">راهنمای خرید</a></li>
-          <li><a href="#">مرجوعی کالا</a></li>
-        </ul>
-      </div>
-
-      <div class="col">
-        <h4>درباره ما</h4>
-        <ul>
-          <li><a href="#">درباره دیجی‌کالا</a></li>
-          <li><a href="#">فرصت‌های شغلی</a></li>
-          <li><a href="#">همکاری با ما</a></li>
-          <li><a href="#">قوانین و حریم خصوصی</a></li>
-        </ul>
-      </div>
-
-      <div class="col">
-        <h4>اپلیکیشن دیجی‌کالا</h4>
-        <p class="small">دانلود اپلیکیشن برای تجربه بهتر و پیشنهادهای اختصاصی</p>
-        <div class="app-badges">
-          <a href="#"><img src="image/sib-app.svg"alt="دانلود از مایکت"></a>
-          <a href="#"><img src="image/myket.svg"alt=" دانلود از سیب اپ"></a>
-        </div>
-      </div>
-
-      <div class="col col-trust">
-        <h4>روش‌های پرداخت و نمادها</h4>
-        <div class="payments">
-          <!-- آیکون‌های پرداخت و نمادها -->
-          <img src="image/sapra.webp" alt="درگاه بانکی" />
-          <img src="image/rezi.webp" alt="سامانه" />
-          <img src="image/kasbokar.webp" alt="نماد اعتماد" />
-        </div>
-        <p class="contact">تلفن پشتیبانی: <a href="tel:+982100000000">۰۲۱-۰۰۰۰۰۰۰۰</a></p>
-      </div>
-
-
-
- <div class="app-banner">
-  <div class="container banner-inner">
-    <!-- آیکون‌های اپلیکیشن سمت چپ -->
-    <div class="app-icons">
-      <a href="#"><img src="image/myket.svg" alt="مایکت"></a>
-      <a href="#"><img src="image/sib-app.svg" alt="سیب اپ"></a>
-    </div>
-
-    <!-- متن سمت راست -->
-    <div class="app-text">
-      دانلود اپلیکیشن دیجی‌کالا
-    </div>
-  </div>
-</div>
-
-
-  </body>
-</html>
